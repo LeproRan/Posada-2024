@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuenta Regresiva para la Posada</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f3f4f6;
+      margin: 0;
+    }
+    #countdown {
+      text-align: center;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    #countdown h1 {
+      color: #b22222;
+    }
+    #countdown .time {
+      font-size: 2em;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="countdown">
+    <h1>Cuenta Regresiva para la Posada</h1>
+    <div class="time" id="days">0 Días</div>
+    <div class="time" id="hours">0 Horas</div>
+    <div class="time" id="minutes">0 Minutos</div>
+    <div class="time" id="seconds">0 Segundos</div>
+  </div>
+
+  <script>
+    // Configura la fecha y hora de la posada
+    const posadaDate = new Date("December 7, 2024 21:00:00").getTime();
+
+    // Actualiza el contador cada segundo
+    const countdown = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = posadaDate - now;
+
+      // Cálculo de días, horas, minutos y segundos restantes
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Muestra el resultado en los elementos HTML correspondientes
+      document.getElementById("days").innerHTML = days + " Días";
+      document.getElementById("hours").innerHTML = hours + " Horas";
+      document.getElementById("minutes").innerHTML = minutes + " Minutos";
+      document.getElementById("seconds").innerHTML = seconds + " Segundos";
+
+      // Si el contador ha llegado a cero
+      if (distance < 0) {
+        clearInterval(countdown);
+        document.getElementById("countdown").innerHTML = "<h1>¡Es la hora de la posada!</h1>";
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
